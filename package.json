@@ -1,13 +1,14 @@
 {
   "name": "versadesk-element-app-hello-world",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "pkg": "rimraf dist && ng build && concat-glob-cli -f dist/**/*.js -o dist/versadesk-element-app-hello-world.js && copyfiles -u 1 src/assets/*.ico dist && rimraf dist/versadesk-element-app-hello-world"
+    "pkg": "rimraf dist && ng build && concat-glob-cli -f dist/**/*.js -o dist/versadesk-element-app-hello-world.js && copyfiles -u 1 src/assets/*.ico dist && rimraf dist/versadesk-element-app-hello-world",
+    "tgz": "copyfiles ./dist/** package.json package/"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.7",
@@ -45,6 +46,7 @@
     "description": "This is an example app",
     "element": "dist/versadesk-element-app-hello-world.js",
     "icon": "dist/assets/favicon.ico",
+    "iconDark": "dist/assets/favicon.ico",
     "tagName": "versadesk-element-app-hello-world",
     "isModule": true,
     "scopes": [
