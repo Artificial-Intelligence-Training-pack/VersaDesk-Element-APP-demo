@@ -1,48 +1,33 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Injector, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Subject, isObservable, takeUntil } from 'rxjs';
-
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements AfterViewInit, OnChanges {
-  @Input('elementId') elementId: string | undefined;
-  @Output('onload') onload = new EventEmitter<any>();
-  title = 'element-app-hello-world';
-  bdpElementApi: any; // TODO should be an ElementAPI Type
+export class AppComponent implements AfterViewInit {
+  elementId = input<string>(""); // Recieved the elementId, some function call requires this elementId.
+  onload = output<any>();        
+  $title = signal('element-app-hello-world');
+  $bdpElementApi = signal<any>(null); // TODO should be an ElementAPI Type (currently, we use the any type.)
   elemInterface = {
-    bdpInitialize: (inputApi: any) => { this.initialize(inputApi).catch(console.log); return; },
-    bdpElementParams$: undefined,
-    bdpNotifyChanges: undefined,
-    bdpIncomingMessage: () => { }
+    phantomInitialize: (inputApi: any) => this.initialize(inputApi).catch(console.log), // The phantomInitialize function wukk be called by PhatnomDesk Client.
+    phantomElementParams$: undefined,
+    phantomNotifyChanges: undefined,
+    phantomIncomingMessage: () => {}
   }
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
-  ngAfterViewInit(): void {
-    this.changeDetectorRef.markForCheck();
-    console.log((window as any).ngZone);
-  }
-  ngOnChanges(changes: SimpleChanges) {
-    for (const prop in changes) {
-      if (prop === 'elementId') {
-        if (changes[prop].isFirstChange()) {
-          this.onload.emit(this.elemInterface);
-        }
-      }
-    }
+  ngAfterViewInit() {
+    this.onload.emit(this.elemInterface); // Fire the onload event once after the view has been initialized.
   }
   async initialize(inputApi: any) {
-    this.bdpElementApi = inputApi;
+    this.$bdpElementApi.set(inputApi);
     console.log('element-app-hello-world initialized.');
     console.log(inputApi);
-    this.changeDetectorRef.markForCheck();
   }
   changeTitle() {
-    this.title = this.title === 'element-app-hello-world' ? 'element-app-hello-world-clicked' : 'element-app-hello-world';
-    this.changeDetectorRef.markForCheck();
+    const title = this.$title();
+    this.$title.set(title === 'element-app-hello-world' ? 'element-app-hello-world-clicked' : 'element-app-hello-world');
   }
 }

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "versadesk-element-app-hello-world": {
+    "element-app-hello-world": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,10 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/versadesk-element-app-hello-world",
+            "outputPath": "dist/element-app-hello-world",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -55,10 +55,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "versadesk-element-app-hello-world:build:production"
+              "buildTarget": "element-app-hello-world:build:production"
             },
             "development": {
-              "buildTarget": "versadesk-element-app-hello-world:build:development"
+              "buildTarget": "element-app-hello-world:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -66,7 +66,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "versadesk-element-app-hello-world:build"
+            "buildTarget": "element-app-hello-world:build"
           }
         },
         "test": {
@@ -91,6 +91,6 @@
     }
   },
   "cli": {
-    "analytics": "a40addf4-268b-448a-b3c0-b994be651df2"
+    "analytics": false
   }
 }

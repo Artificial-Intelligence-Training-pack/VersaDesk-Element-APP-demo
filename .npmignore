@@ -1,6 +1,5 @@
 # We only push dist folder to npm for a smaller bundle size of Element App
 /src
-/package
 .angular
 .vscode
 
