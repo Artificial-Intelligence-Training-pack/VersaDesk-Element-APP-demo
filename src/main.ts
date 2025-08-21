@@ -10,17 +10,18 @@ bootstrapApplication(AppComponent, appConfig)
 
 
 /**
- * When in production stage, 
- * 0. [NOTE] All dependent packages should be moved to devDependencies because customElement should be self-contained without external dependencies.
- * 1. [DO] Comment out the above codes and use the following codes to create custom elements.
- * 2. [DO] Remove the "zone.js" of the line "polyfills": ["zone.js"], in angular.json. (line 19)
- * 3. [DO, but opptional] In src/app/app.config.ts file, provide ngZone via window.ngZone (The Element App does not carry its own zone.js, and uses the zone.js provided by the UI's zone.js.)
- *    Hopefully, this step can be removed for zone-less application.
- * 4. [DO] Please modify the package.json file, see the content of the phantom-desk key.
- *    The element
- *    The "tagName" should be unique and will be used as the customElement tag name.
- * 5. [DO] Use npm run pkg to build and pack the element App into a tgz file that can be imported into phantom-desk locally.
- * 6. [Optional] you may use `npm publish` to publish this element app as a public package. Users can install the element app via phantom-desk's web UI.
+ * 當進入生產階段時，
+ * 0. 【注意】所有依賴套件都應該移到 devDependencies，因為 customElement 必須是自包含的，不能依賴外部套件。
+ * 1. 【要做】請註解掉以上的程式碼，並使用以下程式碼來建立 custom elements。
+ * 2. 【要做】在 angular.json 中，刪除 "polyfills": ["zone.js"] 這一行的 "zone.js"。（第 19 行）
+ * 3. 【要做，但可選】在 src/app/app.config.ts 檔案中，透過 window.ngZone 提供 ngZone
+ *    （Element App 不自帶 zone.js，而是使用 UI 提供的 zone.js。）
+ *    希望未來能移除這個步驟以支援無 zone 的應用。
+ * 4. 【要做】請修改 package.json 檔案，查看 phantom-desk 鍵的內容。
+ *    在「element」下的 "tagName" 必須是唯一的，並將作為 customElement 的標籤名稱使用。
+ * 5. 【要做】使用 `npm run pkg` 將 element App 打包成一個 tgz 檔案，以便在 phantom-desk 中本地安裝。
+ * 6. 【可選】你可以使用 `npm publish` 將此 element app 發布為公開套件。
+ *    使用者可透過 phantom-desk 的 Web UI 來安裝此 element app。
  */
 
 
